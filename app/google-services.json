@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "634061288397",
+    "firebase_url": "https://agendapersonal-ca3fd.firebaseio.com",
+    "project_id": "agendapersonal-ca3fd",
+    "storage_bucket": "agendapersonal-ca3fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634061288397:android:2bcca8fa5c35b3b8",
+        "android_client_info": {
+          "package_name": "com.example.agendapersonal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634061288397-3nc9aeg5s6s2voa53ke5ojn7ji37l3pe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agendapersonal",
+            "certificate_hash": "e166f68544c3593d3a928969e3e0a6a0ff2a90cd"
+          }
+        },
+        {
+          "client_id": "634061288397-i9oo64k271s3bnlg4c0mu90mogqrcjui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMOU_ObG8KXSMq_fUxoS-kQrJ-JEMztxc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634061288397-i9oo64k271s3bnlg4c0mu90mogqrcjui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

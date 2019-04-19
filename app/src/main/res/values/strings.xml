@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">AgendaPersonal</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    //definiendo los string para el contenido principal
+    <string name="bienvenida">Bienvenido a tu agenta personal.</string>
+    <string name="Perfil">Crear Perfil.</string>
+    <string name="Crear">Crear Evento.</string>
+    <string name="Editar">Editar Evento.</string>
+    <string name="Calendario">Ver Calendario</string>
+    /*las otras opciones*/
+    <string name="Otras">Otras Opciones.</string>
+    <string name="Acerca">Acerca de..</string>
+    <string name="Salir">Salir.</string>
+
+    //definiendo los mensajes de la opcion crear perfil
+    <string name="tuPerfil">Tu perfil de usuario.</string>
+    <string name="Nombre">Nombres:</string>
+    <string name="Apellido">Apellidos :</string>
+    <string name="Correo">Correo electrónico :</string>
+
+
+    <!-- definiendo las opciones para la creación de los eventos -->
+    <string name="NuevoEvento">Crear un nuevo evento</string>
+    <string name="NombreEvento">Nombre evento:</string>
+    <string name="DescripcionEvento">Descripción:</string>
+    <string name="FechaEvento">Fecha:</string>
+    <string name="HoraEvento">Hora:</string>
+
+
+
+    /*definiendo los hints de los text de ingreso.*/
+    <string name="NombreEventoHint">Nombre del evento</string>
+    <string name="DescripcionEventoHint">Descripción del evento</string>
+    <string name="FechaEventoHint">Ingresa la fecha</string>
+    <string name="HoraEventoHint">Ingresa la hora</string>
+
+    <!-- definiendo los string para los titulos de los botones -->
+    <string name="Aceptar">Aceptar</string>
+    <string name="tomarFoto">Tomar Foto</string>
+    <string name="Regresar">Regresar</string>
+    <string name="EditarButton">Editar</string>
+    <string name="Eliminar">Eliminar</string>
+    <string name="Guardar">Guardar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">Imagen Usuario</string>
+    <string name="contenidoIngreso"></string>
+
+</resources>

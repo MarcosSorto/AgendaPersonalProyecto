@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_Crear"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/Crear"/>
+        <item
+                android:id="@+id/nav_Editar"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/Editar"/>
+        <item
+                android:id="@+id/nav_Calendario"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="@string/Calendario"/>
+    </group>
+
+    <item android:title="@string/Otras" android:id="@+id/nav_Otras">
+        <menu>
+            <item
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/Perfil" android:id="@+id/nav_Perfil"/>
+            <item
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="@string/Acerca" android:id="@+id/nav_Acerca"/>
+            <item
+                    android:id="@+id/nav_Salir"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="@string/Salir"/>
+        </menu>
+    </item>
+
+</menu>
