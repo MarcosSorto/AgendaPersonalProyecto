@@ -7,16 +7,12 @@ import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
-
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-
 import android.widget.EditText
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_crear_eventos.*
@@ -44,49 +40,55 @@ class CrearEventos : Fragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.fragment_crear_eventos ,null)
-
-
     }
 
     @SuppressLint("SetTextI18n")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*Ocultamos el calendario para que se muestre solo cuando se necesite.*/
-
-
-        /*creamos una variable de tipo editText fecha para acceder a los eventos y métodos*/
-        val laFecha = view.findViewById<EditText>(R.id.txtFecha)
 
         /*Definimos si se ha hecho click en eñ texto de la fecha para ingresarla*/
-        laFecha.setOnClickListener{
+        btnFecha.setOnClickListener{
             val newFragment = DatePickerFragment()
             newFragment.show(this.fragmentManager, "datePicker")
-            //capturamos los datos seleccionados.
-
-
+            txtHora.setText("${Selector.hora}:${Selector.minuto}")
         }
-        
+
+        val laFecha=view.findViewById<EditText>(R.id.txtFecha)
+        laFecha.setOnClickListener{
+            txtFecha.setText("${Selector.anio}/${Selector.mes}/${Selector.dia}")
+        }
+
         /*creamos la variable de tipo edit text para acceder a los eventos y metodos*/
-        val laHora = view.findViewById<EditText>(R.id.txtHora)
-        laHora.setOnClickListener{
+        btnHora.setOnClickListener{
             val newFargemt2 = TimePickerFragment()
             newFargemt2.show(this.fragmentManager,"timePicker")
+            txtHora.setText("${Selector.hora}:${Selector.minuto}")
+        }
+        val laHora=view.findViewById<EditText>(R.id.txtHora)
+        laHora.setOnClickListener{
+            txtHora.setText("${Selector.hora}:${Selector.minuto}")
         }
 
-
         btnGuardarEvento.setOnClickListener{
-            // Establecer la colección a utilizar
-            noteDBRef = store.collection("Eventos")
-            val nombre = view.findViewById<EditText>(R.id.txtNombreEvento)
-            val descripcion =view.findViewById<EditText>(R.id.txtDescripcion)
-            // Almacenar la información en Firebase
-            val evento = Eventos(nombre.text.toString(), descripcion.text.toString())
-            saveNote(evento)
+            if(txtNombreEvento.text.isNullOrEmpty() || txtDescripcion.text.isNullOrEmpty()){
+                Toast.makeText(this.context, "¡Debe llenar el nombre y la descripción!", Toast.LENGTH_SHORT).show()
+            }else{
+                // Establecer la colección a utilizar
+                noteDBRef = store.collection("Eventos")
+                val nombre = view.findViewById<EditText>(R.id.txtNombreEvento)
+                val descripcion =view.findViewById<EditText>(R.id.txtDescripcion)
+                val anio = Selector.anio
+                val mes = Selector.mes
+                val dia=Selector.dia
+                val hora=Selector.hora
+                val minuto=Selector.minuto
 
-            Toast.makeText(view.context,"Se han guardado los datos",Toast.LENGTH_SHORT).show()
+                // Almacenar la información en Firebase
+                val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto)
+                saveNote(evento)
+            }
         }
 
         //definimos si se ha hecho click en la imagen de la fotografía
@@ -178,13 +180,19 @@ class CrearEventos : Fragment() {
         val newNote = HashMap<String, Any>()
         newNote["Nombre"] = note.nombreEvento
         newNote["Descripcion"] = note.descripcionEvento
+        newNote["Anio"] = note.anioEvento
+        newNote["Mes"] = note.mesEvento
+        newNote["Dia"] = note.diaEvento
+        newNote["Hora"] = note.horaEvento
+        newNote["Minuto"] = note.minutoEvento
+        newNote["RegistradoPor"] = note.registradoPor
 
         noteDBRef.add(newNote)
             .addOnCompleteListener {
-                Toast.makeText(this.context, "Nota agregada satisfactoriamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Evento registrado correctamente", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(this.context, "Hubo un error al momento de almacenar la nota", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Ocurrió un error!!", Toast.LENGTH_SHORT).show()
             }
     }
 }

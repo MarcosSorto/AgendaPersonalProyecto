@@ -1,14 +1,13 @@
 package com.example.agendapersonal.dataBase
 
-import com.google.type.Date
-import java.sql.Time
-import java.time.LocalDateTime
-import java.time.LocalTime
-import kotlin.concurrent.timer
 
 data class Eventos(
     val nombreEvento:String="",
     val descripcionEvento:String="",
-    val fechaEvento:Date = Date.getDefaultInstance(),
-    val horaEvento:Int=0
+    val anioEvento:Int = 0,
+    val mesEvento:Int = 0,
+    val diaEvento:Int = 0,
+    val horaEvento:Int = 0,
+    val minutoEvento:Int = 0,
+    val registradoPor:String="Marcos"
 )

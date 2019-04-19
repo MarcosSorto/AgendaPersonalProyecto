@@ -6,14 +6,17 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.widget.DatePicker
-import android.widget.EditText
-import com.example.agendapersonal.R
+
+
+
+import com.example.agendapersonal.Selector
+
 
 
 import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener{
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the current date as the default date in the picker
@@ -28,7 +31,10 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     @SuppressLint("SetTextI18n")
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+        //almacenamos la fecha selecionada.
+        Selector.anio=year
+        Selector.mes=month
+        Selector.dia=day
 
     }
-
 }

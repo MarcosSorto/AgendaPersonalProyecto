@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.text.format.DateFormat
 import android.widget.TimePicker
+import com.example.agendapersonal.Selector
+
 
 import java.util.*
 
@@ -24,5 +26,7 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
         // Do something with the time chosen by the user
+        Selector.hora=hourOfDay
+        Selector.minuto=minute
     }
 }

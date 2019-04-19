@@ -47,10 +47,11 @@
     <string name="EditarButton">Editar</string>
     <string name="Eliminar">Eliminar</string>
     <string name="Guardar">Guardar</string>
-
+    <string name="Fecha">Seleccione Fecha</string>
+    <string name="Hora">Seleccione Hora</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">Imagen Usuario</string>
-    <string name="contenidoIngreso"></string>
+    <string name="contenidoIngreso"> </string>
 
 </resources>
