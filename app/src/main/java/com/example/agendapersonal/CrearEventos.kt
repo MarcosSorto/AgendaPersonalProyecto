@@ -6,6 +6,8 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -21,22 +23,25 @@ import com.example.agendapersonal.dataBase.Eventos
 import com.example.agendapersonal.dateTimePicker.DatePickerFragment
 import com.example.agendapersonal.dateTimePicker.TimePickerFragment
 import com.example.matematicasaplicacion.AppConstants
+
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS", "NAME_SHADOWING", "PLUGIN_WARNING")
+import java.io.ByteArrayOutputStream
+@Suppress("DEPRECATED_IDENTITY_EQUALS", "NAME_SHADOWING", "PLUGIN_WARNING", "DEPRECATION")
 
 class CrearEventos : Fragment() {
     /*variables globales*/
     private  var fileUri: Uri? = null
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var noteDBRef: CollectionReference
+    private var storage  = FirebaseStorage.getInstance()
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -79,15 +84,16 @@ class CrearEventos : Fragment() {
                 noteDBRef = store.collection("Eventos")
                 val nombre = view.findViewById<EditText>(R.id.txtNombreEvento)
                 val descripcion =view.findViewById<EditText>(R.id.txtDescripcion)
-                val anio = Selector.anio
+                val anio= Selector.anio
                 val mes = Selector.mes
-                val dia=Selector.dia
-                val hora=Selector.hora
+                val dia = Selector.dia
+                val hora= Selector.hora
                 val minuto=Selector.minuto
 
                 // Almacenar la información en Firebase
                 val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto)
                 saveNote(evento)
+                saveFoto()
             }
         }
 
@@ -98,6 +104,28 @@ class CrearEventos : Fragment() {
         laFoto.setOnClickListener{
             askCameraPermission()
         }
+
+    }
+
+    private fun saveFoto() {
+       //creando la Referencia
+        val storageRef = storage.reference
+        val referenciaImagenes =storageRef.child("Evento1")
+        val laImagen = view!!.findViewById<ImageView>(R.id.ivFotoEvento)
+        laImagen.isDrawingCacheEnabled = true
+        laImagen.buildDrawingCache()
+        val bitmap = (laImagen.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask = referenciaImagenes.putBytes(data)
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this.context, "ups", Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener {
+            Toast.makeText(this.context, "Se guardó la foto", Toast.LENGTH_SHORT).show()
+        }
+
+
 
     }
 
@@ -129,7 +157,7 @@ class CrearEventos : Fragment() {
                     //once permissions are granted, launch the camera
                     launchCamera()
                 }else{
-                    Toast.makeText(this@CrearEventos.context, "All permissions need to be granted to take photo", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CrearEventos.context, "Requiere de todos los permisos para utilizar la camara.", Toast.LENGTH_LONG).show()
                 }
             }
 
