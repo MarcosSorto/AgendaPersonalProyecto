@@ -23,7 +23,6 @@ import com.example.agendapersonal.dataBase.Eventos
 import com.example.agendapersonal.dateTimePicker.DatePickerFragment
 import com.example.agendapersonal.dateTimePicker.TimePickerFragment
 import com.example.matematicasaplicacion.AppConstants
-
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -77,8 +76,8 @@ class CrearEventos : Fragment() {
         }
 
         btnGuardarEvento.setOnClickListener{
-            if(txtNombreEvento.text.isNullOrEmpty() || txtDescripcion.text.isNullOrEmpty()){
-                Toast.makeText(this.context, "¡Debe llenar el nombre y la descripción!", Toast.LENGTH_SHORT).show()
+            if(txtNombreEvento.text.isNullOrEmpty() || txtDescripcion.text.isNullOrEmpty()||ivFotoEvento.drawable==null){
+                Toast.makeText(this.context, "¡Debe llenar el nombre, la descripción y una foto!", Toast.LENGTH_SHORT).show()
             }else{
                 // Establecer la colección a utilizar
                 noteDBRef = store.collection("Eventos")
@@ -92,8 +91,9 @@ class CrearEventos : Fragment() {
 
                 // Almacenar la información en Firebase
                 val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto)
-                saveNote(evento)
-                saveFoto()
+                    saveFoto(nombre.text.toString())
+                    saveNote(evento)
+
             }
         }
 
@@ -107,14 +107,15 @@ class CrearEventos : Fragment() {
 
     }
 
-    private fun saveFoto() {
+    private fun saveFoto(nombre: String) {
        //creando la Referencia
         val storageRef = storage.reference
-        val referenciaImagenes =storageRef.child("Evento1")
-        val laImagen = view!!.findViewById<ImageView>(R.id.ivFotoEvento)
-        laImagen.isDrawingCacheEnabled = true
-        laImagen.buildDrawingCache()
-        val bitmap = (laImagen.drawable as BitmapDrawable).bitmap
+        val referenciaImagenes =storageRef.child(nombre)
+        val laImagen:ImageView? = view!!.findViewById(R.id.ivFotoEvento)
+
+            laImagen?.isDrawingCacheEnabled = true
+        laImagen?.buildDrawingCache()
+        val bitmap = (laImagen?.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
@@ -124,9 +125,6 @@ class CrearEventos : Fragment() {
         }.addOnSuccessListener {
             Toast.makeText(this.context, "Se guardó la foto", Toast.LENGTH_SHORT).show()
         }
-
-
-
     }
 
     //llamamos a la aplicación camara mediante un Intent
@@ -218,9 +216,24 @@ class CrearEventos : Fragment() {
         noteDBRef.add(newNote)
             .addOnCompleteListener {
                 Toast.makeText(this.context, "Evento registrado correctamente", Toast.LENGTH_SHORT).show()
+                limpiar()
             }
             .addOnFailureListener {
                 Toast.makeText(this.context, "Ocurrió un error!!", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    //creamos una función para limpiar todos los datos una vez guardados.
+    private fun limpiar(){
+        txtNombreEvento.setText("")
+        txtDescripcion.setText(" ")
+        txtFecha.setText(" ")
+        txtHora.setText(" ")
+        ivFotoEvento.setImageResource(R.drawable.ic_menu_camera)
+        Selector.anio=0
+        Selector.dia=0
+        Selector.mes=0
+        Selector.hora=0
+        Selector.minuto=0
     }
 }
