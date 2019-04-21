@@ -20,6 +20,7 @@
 
     //definiendo los mensajes de la opcion crear perfil
     <string name="tuPerfil">Tu perfil de usuario.</string>
+    <string name="Identidad">Identidad:</string>
     <string name="Nombre">Nombres:</string>
     <string name="Apellido">Apellidos :</string>
     <string name="Correo">Correo electrónico :</string>
@@ -41,8 +42,9 @@
     <string name="HoraEventoHint">Ingresa la hora</string>
 
     <!-- definiendo los string para los titulos de los botones -->
-    <string name="Aceptar">Aceptar</string>
+    <string name="Aceptar">Crear</string>
     <string name="tomarFoto">Tomar Foto</string>
+    <string name="Acceder">Acceder</string>
     <string name="Regresar">Regresar</string>
     <string name="EditarButton">Editar</string>
     <string name="Eliminar">Eliminar</string>
@@ -53,5 +55,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">Imagen Usuario</string>
     <string name="contenidoIngreso"> </string>
+    <string name="informacion">Agenda Personal</string>
+    <string name="descripcionApp">Te ayudamos a organizar tus eventos.</string>
 
 </resources>

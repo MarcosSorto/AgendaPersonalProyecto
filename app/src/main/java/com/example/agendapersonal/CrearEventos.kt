@@ -32,6 +32,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
+
 import java.io.ByteArrayOutputStream
 @Suppress("DEPRECATED_IDENTITY_EQUALS", "NAME_SHADOWING", "PLUGIN_WARNING", "DEPRECATION")
 
@@ -56,7 +57,7 @@ class CrearEventos : Fragment() {
         btnFecha.setOnClickListener{
             val newFragment = DatePickerFragment()
             newFragment.show(this.fragmentManager, "datePicker")
-            txtHora.setText("${Selector.hora}:${Selector.minuto}")
+            txtFecha.setText("${Selector.anio}/${Selector.mes}/${Selector.dia}")
         }
 
         val laFecha=view.findViewById<EditText>(R.id.txtFecha)
@@ -76,9 +77,11 @@ class CrearEventos : Fragment() {
         }
 
         btnGuardarEvento.setOnClickListener{
-            if(txtNombreEvento.text.isNullOrEmpty() || txtDescripcion.text.isNullOrEmpty()||ivFotoEvento.drawable==null){
+            if(txtNombreEvento.text.isNullOrEmpty() || txtDescripcion.text.isNullOrEmpty()){
                 Toast.makeText(this.context, "¡Debe llenar el nombre, la descripción y una foto!", Toast.LENGTH_SHORT).show()
             }else{
+
+
                 // Establecer la colección a utilizar
                 noteDBRef = store.collection("Eventos")
                 val nombre = view.findViewById<EditText>(R.id.txtNombreEvento)
@@ -115,7 +118,11 @@ class CrearEventos : Fragment() {
 
             laImagen?.isDrawingCacheEnabled = true
         laImagen?.buildDrawingCache()
+
         val bitmap = (laImagen?.drawable as BitmapDrawable).bitmap
+        if(bitmap ==null){
+
+        }
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()

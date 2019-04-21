@@ -6,6 +6,8 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,7 +15,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import com.example.agendapersonal.dataBase.Perfiles
 import com.example.matematicasaplicacion.AppConstants
 import kotlinx.android.synthetic.main.fragment_crear_perfil.*
 import com.karumi.dexter.Dexter
@@ -21,11 +26,18 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
+import java.io.ByteArrayOutputStream
 
-
+@Suppress("DEPRECATION")
 class CrearPerfil : Fragment() {
     private  var fileUri: Uri? = null
+    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var noteDBRef: CollectionReference
+    private var storage  = FirebaseStorage.getInstance()
 
        @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,13 +48,34 @@ class CrearPerfil : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnFoto.setOnClickListener{
+
+        //verificamos si se hace click sobre tomar fotografía
+        val tomarFoto = view.findViewById<ImageView>(R.id.ivImagen)
+        tomarFoto.setOnClickListener{
             askCameraPermission()
         }
+        //verificamos si se hace click en el boton crear.
+        btnAceptar.setOnClickListener{
+            if(txtIdentidad.text.isNullOrEmpty()||txtNombres.text.isNullOrEmpty()){
+                Toast.makeText(this.context,"¡Debes ingresar la identidad el nombre  y una foto del usuario!",Toast.LENGTH_SHORT).show()
+            }else{
+                //preparamos lo necesario para guardar los datos ingresados
+
+                // Establecer la colección a utilizar
+                noteDBRef = store.collection("Perfiles")
+                val identidad = view.findViewById<EditText>(R.id.txtIdentidad)
+                val nombre =view.findViewById<EditText>(R.id.txtNombres)
+                val apellido =view.findViewById<EditText>(R.id.txtApellidos)
+                val correo =view.findViewById<EditText>(R.id.txtCorreo)
+
+                // Almacenar la información en Firebase
+                val perfil = Perfiles(identidad.text.toString(),nombre.text.toString(),apellido.text.toString(),correo.text.toString())
+                saveFoto(nombre.text.toString())
+                savePerfil(perfil)
+            }
+        }
+
     }
-
-
-
 
     //llamamos a la aplicación camara mediante un Intent
     private fun launchCamera() {
@@ -117,6 +150,55 @@ class CrearPerfil : Fragment() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+
+    }
+
+    private fun saveFoto(nombre: String) {
+        //creando la Referencia
+        val storageRef = storage.reference
+        val referenciaImagenes =storageRef.child(nombre)
+        val laImagen:ImageView? = view!!.findViewById(R.id.ivImagen)
+
+        laImagen?.isDrawingCacheEnabled = true
+        laImagen?.buildDrawingCache()
+
+        val bitmap = (laImagen?.drawable as BitmapDrawable).bitmap
+
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+        val uploadTask = referenciaImagenes.putBytes(data)
+        uploadTask.addOnFailureListener {
+            Toast.makeText(this.context, "ups", Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener {
+            Toast.makeText(this.context, "Se guardó la foto", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun savePerfil(note: Perfiles) {
+        val newNote = HashMap<String, Any>()
+        newNote["Identidad"] = note.identidad
+        newNote["Nombres"] = note.nombre
+        newNote["Apellidos"] = note.apellido
+        newNote["Correo"] = note.correo
+
+        noteDBRef.add(newNote)
+            .addOnCompleteListener {
+                Toast.makeText(this.context, "Evento registrado correctamente", Toast.LENGTH_SHORT).show()
+                limpiar()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this.context, "Ocurrió un error!!", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun limpiar(){
+        txtIdentidad.setText("")
+        txtNombres.setText("")
+        txtApellidos.setText("")
+        txtCorreo.setText("")
+        ivImagen.setImageResource(R.drawable.ic_menu_camera)
+
 
     }
 
