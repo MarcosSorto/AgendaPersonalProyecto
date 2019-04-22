@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 CrearEventos()
             }
            R.id.nav_Editar->{
+
                EditarEventos()
            }
            R.id.nav_Calendario->{
