@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,9 +93,10 @@ class CrearEventos : androidx.fragment.app.Fragment() {
                 val minuto=Selector.minuto
 
                 // Almacenar la información en Firebase
+
                 val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto)
-                    saveFoto(nombre.text.toString())
-                    saveNote(evento)
+                saveFoto(nombre.text.toString(),evento)
+
 
             }
         }
@@ -109,11 +111,12 @@ class CrearEventos : androidx.fragment.app.Fragment() {
 
     }
 
-    private fun saveFoto(nombre: String) {
+    private fun saveFoto(nombre: String, elEvento:Eventos):String {
        //creando la Referencia
         val storageRef = storage.reference
         val referenciaImagenes =storageRef.child(nombre)
         val laImagen:ImageView? = view!!.findViewById(R.id.ivFotoEvento)
+        var image:String=""
 
             laImagen?.isDrawingCacheEnabled = true
         laImagen?.buildDrawingCache()
@@ -130,8 +133,16 @@ class CrearEventos : androidx.fragment.app.Fragment() {
             Toast.makeText(this.context, "ups", Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener {
             Toast.makeText(this.context, "Se guardó la foto", Toast.LENGTH_SHORT).show()
+               referenciaImagenes.downloadUrl.addOnSuccessListener {
+                    saveNote(elEvento,it.toString())
+
+               }
+
             limpiar()
         }
+
+        return image
+
     }
 
     //llamamos a la aplicación camara mediante un Intent
@@ -209,7 +220,7 @@ class CrearEventos : androidx.fragment.app.Fragment() {
         }
 
     }
-    private fun saveNote(note: Eventos) {
+    private fun saveNote(note: Eventos, url:String) {
         val newNote = HashMap<String, Any>()
         newNote["nombreEvento"] = note.nombreEvento
         newNote["descripcionEvento"] = note.descripcionEvento
@@ -219,6 +230,7 @@ class CrearEventos : androidx.fragment.app.Fragment() {
         newNote["horaEvento"] = note.horaEvento
         newNote["minutoEvento"] = note.minutoEvento
         newNote["registradoPor"] = note.registradoPor
+        newNote["UrlEvento"]=url
 
         noteDBRef.add(newNote)
             .addOnCompleteListener {

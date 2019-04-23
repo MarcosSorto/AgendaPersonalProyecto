@@ -33,10 +33,7 @@ class EditarEventos : androidx.fragment.app.Fragment() {
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setTimestampsInSnapshotsEnabled(true)
-            .build()
-        store.firestoreSettings = settings
+
 
         val vista =inflater.inflate(R.layout.fragment_editar_eventos ,null)
         val rvElEventos =vista.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvEventos)

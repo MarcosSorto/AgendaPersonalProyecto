@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.agendapersonal.R
 import com.example.agendapersonal.dataBase.Eventos
 import com.example.agendapersonal.interfaces.RecyclerEventoListener
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_evento_items.view.*
+
 
 class EventoAdapter(private val eventos: List<Eventos>, private val listener: RecyclerEventoListener)
     : RecyclerView.Adapter<EventoAdapter.ViewHolder>() {
@@ -34,6 +37,12 @@ class EventoAdapter(private val eventos: List<Eventos>, private val listener: Re
             txtHoraV.text=("${note.horaEvento}:${note.minutoEvento}")
             // Implementar los eventos
             setOnClickListener { listener.onClick(note, adapterPosition) }
+
+            //defnimod el imageview
+            val iv = itemView.findViewById<ImageView>(R.id.ivFotoEventoC)
+
+            Picasso.with(context).load(note.UrlEvento).into(iv)
+
         }
     }
 }
