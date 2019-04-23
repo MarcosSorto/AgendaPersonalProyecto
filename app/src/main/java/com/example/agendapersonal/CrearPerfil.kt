@@ -11,7 +11,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +33,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
 @Suppress("DEPRECATION")
-class CrearPerfil : Fragment() {
+class CrearPerfil : androidx.fragment.app.Fragment() {
     private  var fileUri: Uri? = null
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var noteDBRef: CollectionReference

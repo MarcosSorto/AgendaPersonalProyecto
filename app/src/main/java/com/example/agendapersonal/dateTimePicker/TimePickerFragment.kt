@@ -4,7 +4,7 @@ package com.example.agendapersonal.dateTimePicker
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.text.format.DateFormat
 import android.widget.TimePicker
 import com.example.agendapersonal.Selector
@@ -12,7 +12,7 @@ import com.example.agendapersonal.Selector
 
 import java.util.*
 
-class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
+class TimePickerFragment : androidx.fragment.app.DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the current time as the default values for the picker

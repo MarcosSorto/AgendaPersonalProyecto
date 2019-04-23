@@ -11,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +35,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 @Suppress("DEPRECATED_IDENTITY_EQUALS", "NAME_SHADOWING", "PLUGIN_WARNING", "DEPRECATION")
 
-class CrearEventos : Fragment() {
+class CrearEventos : androidx.fragment.app.Fragment() {
     /*variables globales*/
     private  var fileUri: Uri? = null
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -131,6 +130,7 @@ class CrearEventos : Fragment() {
             Toast.makeText(this.context, "ups", Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener {
             Toast.makeText(this.context, "Se guardó la foto", Toast.LENGTH_SHORT).show()
+            limpiar()
         }
     }
 
@@ -211,19 +211,21 @@ class CrearEventos : Fragment() {
     }
     private fun saveNote(note: Eventos) {
         val newNote = HashMap<String, Any>()
-        newNote["Nombre"] = note.nombreEvento
-        newNote["Descripcion"] = note.descripcionEvento
-        newNote["Anio"] = note.anioEvento
-        newNote["Mes"] = note.mesEvento
-        newNote["Dia"] = note.diaEvento
-        newNote["Hora"] = note.horaEvento
-        newNote["Minuto"] = note.minutoEvento
-        newNote["RegistradoPor"] = note.registradoPor
+        newNote["nombreEvento"] = note.nombreEvento
+        newNote["descripcionEvento"] = note.descripcionEvento
+        newNote["anioEvento"] = note.anioEvento
+        newNote["mesEvento"] = note.mesEvento
+        newNote["diaEvento"] = note.diaEvento
+        newNote["horaEvento"] = note.horaEvento
+        newNote["minutoEvento"] = note.minutoEvento
+        newNote["registradoPor"] = note.registradoPor
 
         noteDBRef.add(newNote)
             .addOnCompleteListener {
                 Toast.makeText(this.context, "Evento registrado correctamente", Toast.LENGTH_SHORT).show()
-                limpiar()
+
+
+
             }
             .addOnFailureListener {
                 Toast.makeText(this.context, "Ocurrió un error!!", Toast.LENGTH_SHORT).show()
