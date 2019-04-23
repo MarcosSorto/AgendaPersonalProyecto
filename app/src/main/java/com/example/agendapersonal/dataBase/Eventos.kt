@@ -10,5 +10,6 @@ data class Eventos(
     val horaEvento:Int = 0,
     val minutoEvento:Int = 0,
     val UrlEvento:String="",
+    var documeto:String="",
     val registradoPor:String="Marcos"
 )

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   tools:context=".EditarE">
+
+    <TextView
+            android:text="@string/EditarEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTituloCrearEvento" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:textSize="18sp" android:textColor="@color/colorTexto" android:textStyle="bold"/>
+    <ImageView
+            android:src="@drawable/ic_menu_camera"
+            android:layout_width="110dp"
+            android:layout_height="128dp"
+            android:id="@+id/ivFotoEventoE"
+            android:contentDescription="@string/description"
+            android:layout_marginTop="42dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.0" tools:targetApi="donut"/>
+    <TextView
+            android:text="@string/NombreEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNombreAplicaciónE" app:layout_constraintStart_toEndOf="@+id/ivFotoEventoE"
+            android:layout_marginLeft="20dp" android:layout_marginStart="20dp" android:layout_marginTop="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTituloCrearEvento" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" app:layout_constraintHorizontal_bias="0.0"
+            android:textStyle="bold" android:textColor="@color/colorTexto" android:textSize="14sp"/>
+    <EditText
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="@string/contenidoIngreso"
+            android:ems="10"
+            android:id="@+id/txtNombreEventoE"
+            app:layout_constraintStart_toEndOf="@+id/ivFotoEventoE" android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreAplicaciónE" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:hint="@string/NombreEventoHint"
+            android:importantForAutofill="no" tools:targetApi="o"
+    />
+    <TextView
+            android:text="@string/DescripcionEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDescripcion" android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/ivFotoEventoE" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.023" android:textStyle="bold"
+            android:textSize="14sp" android:textColor="@color/colorTexto"/>
+    <EditText
+            android:layout_width="376dp"
+            android:layout_height="67dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/txtDescripcionE" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescripcion" app:layout_constraintHorizontal_bias="0.368"
+            android:hint="@string/DescripcionEventoHint" android:importantForAutofill="no" tools:targetApi="o"/>
+    <TextView
+            android:text="@string/FechaEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFecha" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescripcionE" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.023" android:textStyle="bold"
+            android:textColor="@color/colorTexto"/>
+    <EditText
+            android:layout_width="248dp"
+            android:layout_height="wrap_content"
+            android:inputType="datetime"
+            android:ems="10"
+            android:id="@+id/txtFechaE"
+            android:nextFocusDown="@+id/cvCalendario"
+            android:hint="@string/FechaEventoHint"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvFecha"
+            android:importantForAutofill="no" tools:targetApi="o" tools:ignore="KeyboardInaccessibleWidget"/>
+    <Button
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnGuardarEventoE"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:text="@string/Guardar"
+            android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/txtHoraE"
+            app:layout_constraintHorizontal_bias="0.448"/>
+    <TextView
+            android:text="@string/HoraEvento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvHora" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtFechaE" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.044" android:textColor="@color/colorTexto"
+            android:textStyle="bold" tools:ignore="KeyboardInaccessibleWidget"/>
+    <EditText
+            android:layout_height="wrap_content"
+            android:inputType="datetime"
+            android:ems="10"
+            android:id="@+id/txtHoraE"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_width="245dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvHora" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" android:text="@string/contenidoIngreso" android:hint="@string/HoraEventoHint"
+            tools:ignore="KeyboardInaccessibleWidget"/>
+    <Button
+            android:text="@string/Fecha"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnFechaE" app:layout_constraintStart_toEndOf="@+id/txtFechaE"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" android:layout_marginTop="28dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescripcionE" app:layout_constraintHorizontal_bias="0.0"
+            android:textSize="12sp" android:textColor="@color/colorTexto" android:textStyle="bold"/>
+    <Button
+            android:text="@string/Hora"
+            android:layout_width="139dp"
+            android:layout_height="59dp"
+            android:id="@+id/btnHoraE" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="12sp" android:textStyle="bold"
+            android:textColor="@color/colorTexto"
+            android:layout_marginTop="19dp" app:layout_constraintTop_toBottomOf="@+id/btnFechaE"
+            app:layout_constraintStart_toEndOf="@+id/txtHoraE" android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

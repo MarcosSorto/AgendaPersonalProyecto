@@ -28,6 +28,7 @@
 
     <!-- definiendo las opciones para la creación de los eventos -->
     <string name="NuevoEvento">Crear un nuevo evento</string>
+    <string name="EditarEvento">Editar Eventos</string>
     <string name="NombreEvento">Nombre evento:</string>
     <string name="DescripcionEvento">Descripción:</string>
     <string name="FechaEvento">Fecha:</string>
@@ -53,8 +54,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">Imagen Usuario</string>
-    <string name="contenidoIngreso"></string>
+    <string name="contenidoIngreso"> </string>
     <string name="informacion">Agenda Personal</string>
     <string name="descripcionApp">Te ayudamos a organizar tus eventos.</string>
+
+    /*Titulos para los alertDialog*/
+    <string name="tituloAlerta">¿Que deseas hacer con el evento?</string>
+    <string name="AlertaEditar">Editar</string>
+    <string name="AlertaEliminar">Ningun evento fue afectado.</string>
+    <string name="AlertaCancelar">Cancelar</string>
 
 </resources>

@@ -1,9 +1,7 @@
 package com.example.agendapersonal
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -22,10 +20,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -75,13 +70,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                EditarEventos()
            }
            R.id.nav_Calendario->{
-               CrearPerfil()
+               DefaultFragment()
            }
            R.id.nav_Acerca->{
-               CrearPerfil()
+               DefaultFragment()
            }
            R.id.nav_Salir->{
-               CrearPerfil()
+             DefaultFragment()
            }
         else->{
             DefaultFragment()
