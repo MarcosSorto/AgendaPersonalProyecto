@@ -15,7 +15,7 @@
     <string name="Calendario">Ver Calendario</string>
     /*las otras opciones*/
     <string name="Otras">Otras Opciones.</string>
-    <string name="Acerca">Acerca de..</string>
+    <string name="Acerca">Acceder</string>
     <string name="Salir">Salir.</string>
 
     //definiendo los mensajes de la opcion crear perfil
@@ -54,14 +54,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">Imagen Usuario</string>
-    <string name="contenidoIngreso"> </string>
+    <string name="contenidoIngreso"></string>
     <string name="informacion">Agenda Personal</string>
-    <string name="descripcionApp">Te ayudamos a organizar tus eventos.</string>
+    <string name="descripcionApp">Ayudando a organizarte.</string>
 
     /*Titulos para los alertDialog*/
     <string name="tituloAlerta">¿Que deseas hacer con el evento?</string>
     <string name="AlertaEditar">Editar</string>
-    <string name="AlertaEliminar">Ningun evento fue afectado.</string>
+    <string name="AlertaEliminar">Eliminar.</string>
     <string name="AlertaCancelar">Cancelar</string>
 
+    <!-- definiendo los string para los acceso -->
+    <string name="IdentidadIngreso">Identidad:</string>
+    <string name="NombreIngreso">Nombre:</string>
+    <string name="AccederBoton">Acceder</string>
 </resources>

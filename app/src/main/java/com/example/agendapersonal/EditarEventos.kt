@@ -63,10 +63,11 @@ class EditarEventos : androidx.fragment.app.Fragment() {
                 }
                 builder.setNegativeButton(getString(R.string.AlertaEliminar)) { dialogInterface: DialogInterface, i: Int ->
 
-                    val documet =store.document("Eventos/${eventoList[position].nombreEvento}")
+                    val documet =store.document("Eventos/${eventoList[position].documeto}")
                     documet.delete()
                         .addOnCompleteListener {
-                            Toast.makeText(context, "Eliminando el evento", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Evento Eliminado correctamente.", Toast.LENGTH_SHORT).show()
+                            supportFragmentManager?.beginTransaction()!!.replace(R.id.cmPrincipal, EditarEventos()).commit()
                         }
                         .addOnFailureListener {
                             Toast.makeText(context, "ocurrió un error", Toast.LENGTH_SHORT).show()

@@ -40,7 +40,6 @@ import java.io.ByteArrayOutputStream
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 
 class EditarE(note:Eventos): Fragment() {
-    private var original=""
     private  var fileUri: Uri? = null
    private val event = note
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -56,7 +55,6 @@ class EditarE(note:Eventos): Fragment() {
 
         Picasso.with(vista.context).load(event.UrlEvento).into(vista.ivFotoEventoE)
         vista.txtNombreEventoE.setText(event.nombreEvento)
-        original =event.nombreEvento
         vista.txtDescripcionE.setText(event.descripcionEvento)
         vista.txtFechaE.setText("${event.anioEvento} /${event.mesEvento} /${event.diaEvento} ")
         vista.txtHoraE.setText("${event.horaEvento}:${event.minutoEvento}")
@@ -67,6 +65,7 @@ class EditarE(note:Eventos): Fragment() {
         Selector.dia = event.diaEvento
         Selector.hora = event.horaEvento
         Selector.minuto = event.minutoEvento
+
 
         return vista
     }
@@ -119,7 +118,7 @@ class EditarE(note:Eventos): Fragment() {
                 // Almacenar la información en Firebase
 
                 val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto)
-                saveFoto(nombre.text.toString(),evento)
+                saveFoto(event.documeto,evento)
             }
 
 
@@ -154,7 +153,6 @@ class EditarE(note:Eventos): Fragment() {
         uploadTask.addOnFailureListener {
             Toast.makeText(this.context, "ups", Toast.LENGTH_SHORT).show()
         }.addOnSuccessListener {
-            Toast.makeText(this.context, "Se guardó la foto", Toast.LENGTH_SHORT).show()
             referenciaImagenes.downloadUrl.addOnSuccessListener {
                 saveNote(elEvento,it.toString())
 
@@ -177,12 +175,10 @@ class EditarE(note:Eventos): Fragment() {
         newNote["minutoEvento"] = note.minutoEvento
         newNote["registradoPor"] = note.registradoPor
         newNote["UrlEvento"]=url
-        val documet =store.document("Eventos/$original")
+        val documet =store.document("Eventos/${event.documeto}")
         documet.update(newNote)
             .addOnCompleteListener {
                 Toast.makeText(this.context, "Evento Actualizado correctamente", Toast.LENGTH_SHORT).show()
-
-
 
             }
             .addOnFailureListener {

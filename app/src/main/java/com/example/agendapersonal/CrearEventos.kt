@@ -20,6 +20,7 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_crear_eventos.*
 import android.widget.Toast
 import com.example.agendapersonal.dataBase.Eventos
+import com.example.agendapersonal.dataBase.Perfiles
 import com.example.agendapersonal.dateTimePicker.DatePickerFragment
 import com.example.agendapersonal.dateTimePicker.TimePickerFragment
 import com.example.matematicasaplicacion.AppConstants
@@ -94,7 +95,7 @@ class CrearEventos : androidx.fragment.app.Fragment() {
 
                 // Almacenar la información en Firebase
 
-                val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto)
+                val evento = Eventos(nombre.text.toString(), descripcion.text.toString(),anio,mes,dia,hora,minuto,nombre.text.toString(),Perfiles.ident)
                 saveFoto(nombre.text.toString(),evento)
 
 
@@ -229,6 +230,7 @@ class CrearEventos : androidx.fragment.app.Fragment() {
         newNote["minutoEvento"] = note.minutoEvento
         newNote["registradoPor"] = note.registradoPor
         newNote["UrlEvento"]=url
+        newNote["documeto"]=note.documeto
         val documet =store.document("Eventos/${note.nombreEvento}")
            documet.set(newNote)
 

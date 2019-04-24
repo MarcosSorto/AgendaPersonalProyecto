@@ -11,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,6 +66,9 @@ class CrearPerfil : androidx.fragment.app.Fragment() {
                 val nombre =view.findViewById<EditText>(R.id.txtNombres)
                 val apellido =view.findViewById<EditText>(R.id.txtApellidos)
                 val correo =view.findViewById<EditText>(R.id.txtCorreo)
+
+               Perfiles.ident = identidad.text.toString()
+               Perfiles.name = nombre.text.toString()
 
                 // Almacenar la información en Firebase
                 val perfil = Perfiles(identidad.text.toString(),nombre.text.toString(),apellido.text.toString(),correo.text.toString())
@@ -181,10 +183,10 @@ class CrearPerfil : androidx.fragment.app.Fragment() {
         newNote["Nombres"] = note.nombre
         newNote["Apellidos"] = note.apellido
         newNote["Correo"] = note.correo
-
-        noteDBRef.add(newNote)
+        val documet =store.document("Perfiles/${note.identidad}")
+       documet.set(newNote)
             .addOnCompleteListener {
-                Toast.makeText(this.context, "Evento registrado correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Perfil registrado correctamente", Toast.LENGTH_SHORT).show()
                 limpiar()
             }
             .addOnFailureListener {

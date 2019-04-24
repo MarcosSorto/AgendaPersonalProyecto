@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     //instanciamos un objeto de tipo fragment
    private var nuevoFragment: androidx.fragment.app.Fragment?=null
@@ -70,13 +71,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                EditarEventos()
            }
            R.id.nav_Calendario->{
-               DefaultFragment()
+              Calendario()
            }
            R.id.nav_Acerca->{
                DefaultFragment()
-           }
-           R.id.nav_Salir->{
-             DefaultFragment()
            }
         else->{
             DefaultFragment()

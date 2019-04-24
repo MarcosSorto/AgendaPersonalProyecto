@@ -9,7 +9,7 @@ data class Eventos(
     val diaEvento:Int = 0,
     val horaEvento:Int = 0,
     val minutoEvento:Int = 0,
-    val UrlEvento:String="",
     var documeto:String="",
-    val registradoPor:String="Marcos"
+    val registradoPor:String="",
+    val UrlEvento:String=""
 )

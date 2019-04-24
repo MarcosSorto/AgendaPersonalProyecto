@@ -103,7 +103,8 @@
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:text="@string/Guardar"
             android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/txtHoraE"
-            app:layout_constraintHorizontal_bias="0.448"/>
+            app:layout_constraintHorizontal_bias="0.448" android:background="@color/colorPrimary"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"/>
     <TextView
             android:text="@string/HoraEvento"
             android:layout_width="wrap_content"
